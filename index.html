@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bienvenida - Trabajo de Investigación I</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--ucv-red:#C62828;--ucv-dark:#1a1a2e;--ucv-blue:#0d47a1;
+--accent:#00bcd4;--gold:#ffb300;--bg:#0a0e1a;
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:#e0e0e0;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:1000;backdrop-filter:blur(20px);
+background:rgba(10,14,26,.85);border-bottom:1px solid rgba(255,255,255,.06);padding:12px 40px;display:flex;align-items:center;gap:20px}
+nav .logo{font-weight:800;font-size:1.1rem;color:var(--ucv-red);letter-spacing:1px}
+nav .dots{display:flex;gap:8px;margin-left:auto}
+nav .dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.15);cursor:pointer;transition:.3s}
+nav .dot.active{background:var(--accent);box-shadow:0 0 8px var(--accent)}
+
+/* SECTIONS */
+section{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 60px;position:relative}
+
+/* SLIDE 1 - HERO */
+.hero{background:linear-gradient(135deg,var(--bg) 0%,#0d1b3e 50%,#1a0a2e 100%);overflow:hidden}
+.hero::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;
+background:radial-gradient(circle,rgba(198,40,40,.15),transparent 70%);top:-100px;right:-100px;animation:float 8s ease-in-out infinite}
+.hero::after{content:'';position:absolute;width:400px;height:400px;border-radius:50%;
+background:radial-gradient(circle,rgba(0,188,212,.1),transparent 70%);bottom:-50px;left:-50px;animation:float 10s ease-in-out infinite reverse}
+@keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,-30px)}}
+
+.hero-content{max-width:900px;text-align:center;z-index:2}
+.hero-badge{display:inline-block;padding:6px 20px;border:1px solid var(--ucv-red);border-radius:30px;font-size:.75rem;
+letter-spacing:3px;text-transform:uppercase;color:var(--ucv-red);margin-bottom:30px;animation:fadeDown .8s ease}
+.hero h1{font-size:clamp(2.5rem,5vw,4.2rem);font-weight:800;line-height:1.1;margin-bottom:20px;
+background:linear-gradient(135deg,#fff 0%,#ccc 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:fadeDown 1s ease}
+.hero h1 span{background:linear-gradient(135deg,var(--ucv-red),#ef5350);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.15rem;color:#aaa;max-width:600px;margin:0 auto 40px;line-height:1.7;animation:fadeDown 1.2s ease}
+.hero-cta{display:inline-flex;align-items:center;gap:10px;padding:14px 36px;background:linear-gradient(135deg,var(--ucv-red),#b71c1c);
+color:#fff;border-radius:50px;font-weight:600;text-decoration:none;transition:.3s;cursor:pointer;border:none;font-size:1rem;font-family:inherit}
+.hero-cta:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(198,40,40,.4)}
+.hero-cta svg{width:20px;height:20px}
+
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+
+/* SLIDE 2 - DOCENTE */
+.docente{background:linear-gradient(160deg,#0d1b3e,var(--bg))}
+.docente-grid{display:grid;grid-template-columns:320px 1fr;gap:60px;max-width:1100px;align-items:center}
+.docente-photo{position:relative}
+.docente-photo .frame{width:280px;height:340px;border-radius:20px;overflow:hidden;position:relative;
+border:2px solid rgba(0,188,212,.3);box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.docente-photo .frame img{width:100%;height:100%;object-fit:cover}
+.docente-photo .frame .overlay{position:absolute;bottom:0;left:0;right:0;padding:20px;
+background:linear-gradient(transparent,rgba(0,0,0,.9))}
+.docente-photo .glow{position:absolute;width:200px;height:200px;border-radius:50%;
+background:var(--accent);opacity:.08;filter:blur(60px);top:-30px;left:-30px}
+.docente-info h2{font-size:2.2rem;font-weight:700;margin-bottom:8px}
+.docente-info h2 span{color:var(--accent)}
+.docente-info .title{color:var(--ucv-red);font-weight:600;font-size:.95rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:24px}
+.docente-info .bio{color:#aaa;line-height:1.8;margin-bottom:30px}
+.credential-tags{display:flex;flex-wrap:wrap;gap:10px}
+.credential-tags span{padding:6px 16px;border-radius:20px;font-size:.8rem;font-weight:500;
+background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)}
+.credential-tags span.highlight{background:rgba(0,188,212,.1);border-color:rgba(0,188,212,.3);color:var(--accent)}
+
+/* SLIDE 3 - CURSO */
+.curso{background:linear-gradient(160deg,#0a0e1a,#1a0a2e)}
+.curso-content{max-width:1100px;width:100%}
+.curso-content h2{font-size:2.4rem;font-weight:700;text-align:center;margin-bottom:50px}
+.curso-content h2 span{color:var(--gold)}
+.info-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px}
+.info-card{padding:30px;border-radius:16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);
+transition:.3s;position:relative;overflow:hidden}
+.info-card:hover{transform:translateY(-4px);border-color:rgba(0,188,212,.3);background:rgba(0,188,212,.03)}
+.info-card .icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+margin-bottom:16px;font-size:1.4rem}
+.info-card h3{font-size:1rem;font-weight:600;margin-bottom:8px;color:#fff}
+.info-card p{font-size:.88rem;color:#888;line-height:1.6}
+.ic-red .icon{background:rgba(198,40,40,.15);color:var(--ucv-red)}
+.ic-cyan .icon{background:rgba(0,188,212,.15);color:var(--accent)}
+.ic-gold .icon{background:rgba(255,179,0,.15);color:var(--gold)}
+.ic-blue .icon{background:rgba(13,71,161,.2);color:#42a5f5}
+
+/* SLIDE 4 - CRONOGRAMA */
+.cronograma{background:var(--bg)}
+.crono-content{max-width:1000px;width:100%}
+.crono-content h2{font-size:2.2rem;font-weight:700;text-align:center;margin-bottom:16px}
+.crono-content h2 span{color:var(--accent)}
+.crono-sub{text-align:center;color:#777;margin-bottom:40px;font-size:.95rem}
+.timeline{position:relative;padding-left:40px}
+.timeline::before{content:'';position:absolute;left:14px;top:0;bottom:0;width:2px;background:linear-gradient(var(--ucv-red),var(--accent),var(--gold))}
+.tl-item{position:relative;margin-bottom:20px;padding:18px 24px;border-radius:12px;
+background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);transition:.3s;cursor:default}
+.tl-item:hover{border-color:rgba(0,188,212,.2);background:rgba(0,188,212,.02)}
+.tl-item::before{content:'';position:absolute;left:-33px;top:24px;width:12px;height:12px;border-radius:50%;
+background:var(--accent);border:2px solid var(--bg)}
+.tl-item .week{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.tl-item .activity{font-size:.9rem;color:#ccc;line-height:1.5}
+.tl-item .dates{font-size:.75rem;color:#555;margin-top:6px}
+.tl-scroll{max-height:500px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--accent) transparent}
+
+/* SLIDE 5 - EVALUACIÓN */
+.evaluacion{background:linear-gradient(160deg,#0d1b3e,var(--bg))}
+.eval-content{max-width:1000px;width:100%}
+.eval-content h2{font-size:2.2rem;font-weight:700;text-align:center;margin-bottom:50px}
+.eval-content h2 span{color:var(--ucv-red)}
+.eval-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.eval-box{padding:30px;border-radius:16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)}
+.eval-box h3{font-size:1.1rem;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.eval-box h3 .num{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+font-size:.85rem;font-weight:700;background:rgba(198,40,40,.15);color:var(--ucv-red)}
+.formula{font-family:'Space Mono',monospace;font-size:.85rem;padding:12px 16px;border-radius:8px;
+background:rgba(0,188,212,.05);border:1px solid rgba(0,188,212,.15);color:var(--accent);margin-top:16px}
+.eval-bar{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.eval-bar .label{font-size:.85rem;color:#aaa;width:120px}
+.eval-bar .bar{flex:1;height:8px;border-radius:4px;background:rgba(255,255,255,.06);overflow:hidden}
+.eval-bar .bar .fill{height:100%;border-radius:4px;transition:width 1s ease}
+.fill-red{background:var(--ucv-red)}.fill-cyan{background:var(--accent)}.fill-gold{background:var(--gold)}
+
+/* SLIDE 6 - HERRAMIENTAS */
+.herramientas{background:linear-gradient(160deg,var(--bg),#0d1b3e)}
+.herr-content{max-width:1000px;width:100%;text-align:center}
+.herr-content h2{font-size:2.2rem;font-weight:700;margin-bottom:50px}
+.herr-content h2 span{color:var(--gold)}
+.tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.tool-card{padding:30px 20px;border-radius:16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);
+transition:.3s;text-align:center}
+.tool-card:hover{transform:scale(1.03);border-color:rgba(255,179,0,.3)}
+.tool-card .tool-icon{font-size:2.5rem;margin-bottom:12px}
+.tool-card h4{font-size:1rem;font-weight:600;margin-bottom:6px;color:#fff}
+.tool-card p{font-size:.82rem;color:#777;line-height:1.5}
+
+/* SLIDE 7 - CIERRE */
+.cierre{background:linear-gradient(135deg,#1a0a2e,var(--ucv-dark),#0d1b3e);text-align:center}
+.cierre-content{max-width:700px}
+.cierre h2{font-size:2.8rem;font-weight:800;margin-bottom:20px}
+.cierre h2 span{color:var(--gold)}
+.cierre p{font-size:1.1rem;color:#aaa;line-height:1.8;margin-bottom:30px}
+.cierre .contact{display:inline-flex;align-items:center;gap:10px;padding:12px 28px;
+border-radius:30px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);font-size:.9rem;color:var(--accent)}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  section{padding:80px 24px}
+  .docente-grid{grid-template-columns:1fr;text-align:center}
+  .docente-photo{display:flex;justify-content:center}
+  .eval-grid{grid-template-columns:1fr}
+  .tools-grid{grid-template-columns:1fr 1fr}
+  .credential-tags{justify-content:center}
+  nav{padding:10px 20px}
+}
+@media(max-width:480px){
+  .tools-grid{grid-template-columns:1fr}
+}
+
+/* ANIMATIONS */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">UCV &mdash; INVESTIGACIÓN I</div>
+  <div class="dots">
+    <div class="dot active" onclick="goTo(0)"></div>
+    <div class="dot" onclick="goTo(1)"></div>
+    <div class="dot" onclick="goTo(2)"></div>
+    <div class="dot" onclick="goTo(3)"></div>
+    <div class="dot" onclick="goTo(4)"></div>
+    <div class="dot" onclick="goTo(5)"></div>
+    <div class="dot" onclick="goTo(6)"></div>
+  </div>
+</nav>
+
+<!-- 1. HERO -->
+<section class="hero" id="s0">
+  <div class="hero-content">
+    <div class="hero-badge">Semestre 2026-I &bull; IX Ciclo</div>
+    <h1>Trabajo de<br><span>Investigación I</span></h1>
+    <p>Bienvenidos a esta experiencia curricular donde desarrollarán competencias investigativas para elaborar y sustentar su proyecto de investigación.</p>
+    <button class="hero-cta" onclick="goTo(1)">Conoce a tu docente
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- 2. DOCENTE -->
+<section class="docente" id="s1">
+  <div class="docente-grid reveal">
+    <div class="docente-photo">
+      <div class="glow"></div>
+      <div class="frame">
+        <img src="foto_docente.png" alt="Mg. Liliana Bayona Castañeda" onerror="this.parentElement.style.background='linear-gradient(135deg,#1a237e,#0d47a1)';this.style.display='none'">
+      </div>
+    </div>
+    <div class="docente-info">
+      <h2>Mg. Liliana <span>Bayona Castañeda</span></h2>
+      <div class="title">Docente &mdash; Escuela de Ingeniería de Sistemas</div>
+      <p class="bio">Ing. de Sistemas y Magíster en Gestión de la Información (UPV, España – Becaria PRONABEC). Más de 14 años de experiencia en gestión documental, sistemas de información e investigación aplicada en bioinformática, tecnología educativa, e-health y datos abiertos. Certificada Scrum Master y diplomada en Gestión de Proyectos PMP.</p>
+      <div class="credential-tags">
+        <span class="highlight">Mg. Gestión de la Información</span>
+        <span>Ing. de Sistemas - UCV</span>
+        <span class="highlight">Scrum Master</span>
+        <span>PMP</span>
+        <span class="highlight">Bioinformática</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. CURSO -->
+<section class="curso" id="s2">
+  <div class="curso-content reveal">
+    <h2>Sobre el <span>Curso</span></h2>
+    <div class="info-cards">
+      <div class="info-card ic-red">
+        <div class="icon">🎯</div>
+        <h3>Propósito</h3>
+        <p>Generar y potenciar competencias investigativas, elaborando un proyecto de investigación con metodología científica.</p>
+      </div>
+      <div class="info-card ic-cyan">
+        <div class="icon">📋</div>
+        <h3>Modalidad</h3>
+        <p>Semipresencial &bull; 16 sesiones &bull; 112 horas lectivas (80 Teoría + 32 Práctica) &bull; 6 créditos.</p>
+      </div>
+      <div class="info-card ic-gold">
+        <div class="icon">📊</div>
+        <h3>Ejes Temáticos</h3>
+        <p>Introducción, Marco Metodológico, Aspectos Administrativos, Revisión y Sustentación del proyecto.</p>
+      </div>
+      <div class="info-card ic-blue">
+        <div class="icon">⚠️</div>
+        <h3>Integridad Académica</h3>
+        <p>Turnitin &lt; 20% de similitud. <strong>Prohibido incorporar textos generados con IA.</strong> Código de Ética UCV vigente.</p>
+      </div>
+      <div class="info-card ic-red">
+        <div class="icon">🌍</div>
+        <h3>ODS Vinculados</h3>
+        <p>Los proyectos deben alinearse a los Objetivos de Desarrollo Sostenible de las Naciones Unidas.</p>
+      </div>
+      <div class="info-card ic-cyan">
+        <div class="icon">🏛️</div>
+        <h3>Comité de Ética</h3>
+        <p>Todo proyecto se somete al Comité de Ética en Investigación de la UCV para aprobación antes de sustentación.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. CRONOGRAMA -->
+<section class="cronograma" id="s3">
+  <div class="crono-content reveal">
+    <h2>Cronograma <span>2026-I</span></h2>
+    <p class="crono-sub">16 sesiones &bull; Del 6 de abril al 19 de julio 2026</p>
+    <div class="tl-scroll">
+      <div class="timeline" id="timeline"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. EVALUACIÓN -->
+<section class="evaluacion" id="s4">
+  <div class="eval-content reveal">
+    <h2>Sistema de <span>Evaluación</span></h2>
+    <div class="eval-grid">
+      <div class="eval-box">
+        <h3><span class="num">I</span> Primera Unidad (40%)</h3>
+        <div class="eval-bar"><span class="label">INV (20%)</span><div class="bar"><div class="fill fill-cyan" style="width:20%"></div></div></div>
+        <div class="eval-bar"><span class="label">EC (50%)</span><div class="bar"><div class="fill fill-red" style="width:50%"></div></div></div>
+        <div class="eval-bar"><span class="label">EP (30%)</span><div class="bar"><div class="fill fill-gold" style="width:30%"></div></div></div>
+        <div class="formula">X1 = 0.20×INV + 0.50×EC + 0.30×EP</div>
+      </div>
+      <div class="eval-box">
+        <h3><span class="num">II</span> Segunda Unidad (60%)</h3>
+        <div class="eval-bar"><span class="label">INV (20%)</span><div class="bar"><div class="fill fill-cyan" style="width:20%"></div></div></div>
+        <div class="eval-bar"><span class="label">EF (80%)</span><div class="bar"><div class="fill fill-red" style="width:80%"></div></div></div>
+        <div class="formula">X2 = 0.20×INV + 0.80×EF</div>
+      </div>
+    </div>
+    <div class="formula" style="text-align:center;margin-top:30px;font-size:1rem;padding:16px">
+      NOTA FINAL = 0.40 × X1 + 0.60 × X2
+    </div>
+  </div>
+</section>
+
+<!-- 6. HERRAMIENTAS -->
+<section class="herramientas" id="s5">
+  <div class="herr-content reveal">
+    <h2>Herramientas y <span>Recursos</span></h2>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <div class="tool-icon">📚</div>
+        <h4>Blackboard Learn Ultra</h4>
+        <p>Plataforma principal del curso: materiales, foros, evaluaciones y entregas.</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">🤖</div>
+        <h4>Clementina</h4>
+        <p>Plataforma complementaria de la UCV para recursos y actividades interactivas.</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">🔍</div>
+        <h4>Turnitin</h4>
+        <p>Software antiplagio. Tu proyecto debe tener &lt;20% de similitud. Sin textos IA.</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">📖</div>
+        <h4>Scopus / SciELO / MyLoft</h4>
+        <p>Bases de datos académicas para fuentes confiables de tu investigación.</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">🗂️</div>
+        <h4>Sistema Trilce</h4>
+        <p>Registro del proyecto, metadatos y productos de investigación.</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">📝</div>
+        <h4>Guía de Elaboración</h4>
+        <p>Reglamento y Guía de trabajos conducentes a grados y títulos de la UCV.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. CIERRE -->
+<section class="cierre" id="s6">
+  <div class="cierre-content reveal">
+    <h2>¡Éxito en esta <span>nueva experiencia</span>!</h2>
+    <p>Espero que en este ciclo se concreten todas las metas propuestas. Les deseo muchos éxitos en esta nueva experiencia que están iniciando. ¡Bienvenidos!</p>
+    <div class="contact">✉️ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0361627a6c6d6260623b3643766075756a717776626f2d6667762d7366">[email&#160;protected]</a></div>
+  </div>
+</section>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// Timeline data
+const sessions = [
+  {s:"Sesión 1",d:"06 – 12 Abr",t:"Realidad problemática en ejercicio Turnitin. Adaptación de solicitud de autorización y compromiso de autoría."},
+  {s:"Sesión 2",d:"13 – 19 Abr",t:"Avance hasta objetivos de investigación en ejercicio Turnitin (EC)."},
+  {s:"Sesión 3",d:"20 – 26 Abr",t:"Avance hasta marco teórico / hipótesis en ejercicio Turnitin (EC). Registro de títulos y líneas en Trilce."},
+  {s:"Sesión 4",d:"27 Abr – 03 May",t:"Continuación de revisión de literatura, antecedentes y hipótesis en ejercicio Turnitin (EC)."},
+  {s:"Sesión 5",d:"04 – 10 May",t:"Avance hasta capítulo de Metodología en ejercicio Turnitin (EC)."},
+  {s:"Sesión 6",d:"06 – 11 May",t:"Avance de metodología. Presentación de instrumento de recolección de datos para validez y consistencia."},
+  {s:"Sesión 7",d:"11 – 17 May",t:"Avance hasta aspectos administrativos en ejercicio Turnitin. Citas y referencias."},
+  {s:"Sesión 8",d:"18 – 24 May",t:"Presentación del proyecto culminado (INV). Registro en Trilce con &lt;20% similitud."},
+  {s:"Sesión 9",d:"25 – 31 May",t:"Sustentación del proyecto (EP). Envío al Comité de Ética en Investigación."},
+  {s:"Sesión 10",d:"01 – 07 Jun",t:"Levantamiento de observaciones del Comité de Ética."},
+  {s:"Sesión 11",d:"08 – 14 Jun",t:"Levantamiento de observaciones del Comité de Ética."},
+  {s:"Sesión 12",d:"15 – 21 Jun",t:"Registro del proyecto final en Trilce con datos actualizados (INV)."},
+  {s:"Sesión 13",d:"22 – 28 Jun",t:"Registro del proyecto final en Trilce (INV). Preparación de material de sustentación."},
+  {s:"Sesión 14",d:"20 Jun – 05 Jul",t:"Versión final registrada en Trilce. Turnitin &lt;20%. Registro de % similitud (INV)."},
+  {s:"Sesión 15",d:"06 – 12 Jul",t:"Segunda jornada: Sustentación del proyecto final ante el jurado (EF)."},
+  {s:"Sesión 16",d:"13 – 19 Jul",t:"Segunda jornada: Sustentación final ante el jurado (EF)."},
+];
+const tl = document.getElementById('timeline');
+sessions.forEach(s => {
+  tl.innerHTML += `<div class="tl-item"><div class="week">${s.s} &mdash; ${s.d}</div><div class="activity">${s.t}</div></div>`;
+});
+
+// Navigation
+const sections = document.querySelectorAll('section');
+const dots = document.querySelectorAll('.dot');
+function goTo(i){sections[i].scrollIntoView({behavior:'smooth'})}
+
+// Scroll observer
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      const i = [...sections].indexOf(e.target);
+      do
