@@ -167,13 +167,13 @@ border-radius:30px;background:rgba(255,255,255,.05);border:1px solid rgba(255,25
 <nav>
   <div class="logo">UCV &mdash; INVESTIGACIÓN I</div>
   <div class="dots">
-    <div class="dot active" onclick="goTo(0)"></div>
-    <div class="dot" onclick="goTo(1)"></div>
-    <div class="dot" onclick="goTo(2)"></div>
-    <div class="dot" onclick="goTo(3)"></div>
-    <div class="dot" onclick="goTo(4)"></div>
-    <div class="dot" onclick="goTo(5)"></div>
-    <div class="dot" onclick="goTo(6)"></div>
+    <div class="dot active" data-slide="0"></div>
+    <div class="dot" data-slide="1"></div>
+    <div class="dot" data-slide="2"></div>
+    <div class="dot" data-slide="3"></div>
+    <div class="dot" data-slide="4"></div>
+    <div class="dot" data-slide="5"></div>
+    <div class="dot" data-slide="6"></div>
   </div>
 </nav>
 
@@ -183,7 +183,7 @@ border-radius:30px;background:rgba(255,255,255,.05);border:1px solid rgba(255,25
     <div class="hero-badge">Semestre 2026-I &bull; IX Ciclo</div>
     <h1>Trabajo de<br><span>Investigación I</span></h1>
     <p>Bienvenidos a esta experiencia curricular donde desarrollarán competencias investigativas para elaborar y sustentar su proyecto de investigación.</p>
-    <button class="hero-cta" onclick="goTo(1)">Conoce a tu docente
+    <button class="hero-cta" data-slide="1">Conoce a tu docente
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </button>
   </div>
@@ -337,6 +337,15 @@ border-radius:30px;background:rgba(255,255,255,.05);border:1px solid rgba(255,25
 </section>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// Navigation via event delegation (no inline onclick needed)
+document.addEventListener('click', function(e) {
+  var el = e.target.closest('[data-slide]');
+  if (el) {
+    var i = parseInt(el.getAttribute('data-slide'));
+    document.querySelectorAll('section')[i].scrollIntoView({behavior:'smooth'});
+  }
+});
+
 // Timeline data
 const sessions = [
   {s:"Sesión 1",d:"06 – 12 Abr",t:"Realidad problemática en ejercicio Turnitin. Adaptación de solicitud de autorización y compromiso de autoría."},
@@ -361,14 +370,19 @@ sessions.forEach(s => {
   tl.innerHTML += `<div class="tl-item"><div class="week">${s.s} &mdash; ${s.d}</div><div class="activity">${s.t}</div></div>`;
 });
 
-// Navigation
-const sections = document.querySelectorAll('section');
-const dots = document.querySelectorAll('.dot');
-function goTo(i){sections[i].scrollIntoView({behavior:'smooth'})}
-
 // Scroll observer
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
+var allSections = document.querySelectorAll('section');
+var allDots = document.querySelectorAll('.dot');
+var obs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
     if(e.isIntersecting){
-      const i = [...sections].indexOf(e.target);
-      do
+      var i = Array.from(allSections).indexOf(e.target);
+      allDots.forEach(function(d,j){ d.classList.toggle('active', j===i); });
+      e.target.querySelectorAll('.reveal').forEach(function(r){ r.classList.add('visible'); });
+    }
+  });
+},{threshold:0.3});
+allSections.forEach(function(s){ obs.observe(s); });
+</script>
+</body>
+</html>
